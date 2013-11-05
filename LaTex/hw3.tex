@@ -30,12 +30,12 @@
 
 
         % part b)
-        \item Now we generate rows of a generator matrix $G$ in the same fashion as before, but they are drawn from the ideal and robust soliton distribution.
+        \item Now we generate rows of a generator matrix $G$ in the same fashion as before, but they are drawn from the ideal and robust soliton distribution. The encoding process is exactly the same as discussed in class. We choose a number $D$ from the Soliton distribution of choice. Then we randomly choose $D$ elements in a row of length $k$ and choose them to be 1's. Thus those $D$ elements will have their parity checked by the current row of the matrix being generated. We use the function sampleFromDist to sample from the Soliton distribution and then generateRow to create rows of the Matrix. In rateless.m we continuously generate rows of the matrix until we can successfully decode. The following are plots of the PMF's of $N$ for both the ideal and robust Soliton distribution, where $N$ is the number of rows of $G$ that must be generated before we can successfully decode using a linear equation solver (i.e. the matrix $G$ is full rank).
 
 
 
         % part c)
-        \item
+        \item The function to solve a sparse system of equations by substitution only (found in substitutionSolver.m) implements an
 
 
 
