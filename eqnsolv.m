@@ -9,7 +9,7 @@ parity = [parity; newParity];
 
 if method == 1
     %CHECK IF WE CAN DECODE WITH LINEAR EQN SOLVER
-    if row >= k && rank(G) == size(G,2)
+    if row >= k
         [decoded, tf] = linearSolver(G, parity, message);     
     else
         tf = false;
