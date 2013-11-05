@@ -207,15 +207,18 @@
                 k &\geq \frac{87\cdot86}{\log{\frac{1}{1 - \delta}}}
             \end{flalign*}
             Thus, if we are willing to tolerate a loop probability of $\delta$, $k$ must be larger than $\frac{87\cdot86}{\log{\frac{1}{1 - \delta}}}$.
-            
-            
+
+
         % part i)
         \item
-            
+
 
         % part j)
         \item
-
+            An erased bit at level $i - 1$ is unable to be recovered if both of its lower-neighbor parity bits are useless. A parity bit is useless if it is erased, or if any of its 29 lower-neighbor data bits are erased, since we decode by pushing/XORing lower-neighbor data bits up into parity bits. Since we are assuming the $s$ parity bits were sent reliably, we will just worry about the case where any of a parity bit's lower-neighbor data bits are erased. The probability of a data bit being erased is $p$, and the probability that any of a parity bit's lower-neighbor data bits are erased is $1 - (1 - p)^29$. A data bit has two lower-neighbor parity bits, so we have:
+            \begin{flalign*}
+                p_e[i - 1] &= p(1 - (1 - p)^{29})^2          
+            \end{flalign*}
 
         % part k)
         \item
