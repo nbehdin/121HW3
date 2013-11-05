@@ -35,14 +35,14 @@
 
 
         % part c)
-        \item The function to solve a sparse system of equations by substitution only (found in substitutionSolver.m) implements an
+        \item The function to solve a sparse system of equations by substitution only (found in substitutionSolver.m) implements an algorithm similar to that described in Luby's seminal paper on LT Codes. The substitution based solver has more strict conditions for solvability than simple linear equation solving, so it will require more rows from the parity check matrix to decode. We are willing to pay this price price for the linear time decoding granted by substitution decoding. Below are plots of the PMF's of $N$ for both the ideal and robust Soliton distribution, where $N$ is the number of rows of $G$ that must be generated before we can successfully decode using our substitution decoding algorithm.
 
 
 
 
 
         % part d)
-        \item
+        \item Although substitution based decoding requires more overall equations, linear time decoding allows us to decode for much larger values of $k$, whereas the linear equation solver simply takes too long to decode.
 
 
 
