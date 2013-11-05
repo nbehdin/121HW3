@@ -35,7 +35,7 @@ while ~distrb
 end
 
 
-numTrials = 100;
+numTrials = 10;
 N = zeros(1,numTrials);
 for i = 1:numTrials
     %Initialize generator matrix for efficiency
@@ -56,6 +56,6 @@ for i = 1:numTrials
     N(i) = row;
 end
 
-histnorm(N);
+histnorm(N,500);
 end
 
