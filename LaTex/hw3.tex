@@ -59,7 +59,7 @@
 
         % part a)
         \item
-            
+
 
         % part b)
         \item
@@ -90,7 +90,7 @@
                 \alpha &> \frac{1}{p + \epsilon}
             \end{flalign*}
             And thus we see that, if we choose $\alpha > \frac{1}{p}$, this scheme will work with probability of error going to zero with $s$.
-            
+
         % part c)
         \item
             Consider a message $\vec{m}$ of length $n = \alpha k = \alpha^2 s$. We would like to send this message over an unreliable channel without any coding. Let $H_1$ be a dense random parity-check matrix that linearly maps $n = \alpha k$ bits into $k$ parities. In parts a) and b), we showed that we can recover $\alpha s$ unreliable bits from $s$ reliable bits. So, if we can reliably send the $k$ parity bits computed via $H_1\vec{m}$, we can use them to recover the $n = \alpha k$ bits of $\vec{m}$. How do we reliably send the $k$ parity bits of $H_1\vec{m}$? We use the same strategy: let $H_2$ be a different dense random parity-check matrix that linearly maps $k = \alpha s$ bits into $s$ parities. We can then recover the $k = \alpha s$ bits of $H_1\vec{m}$ from the $s$ parity bits computed via $H_2(H_1\vec{m})$, since we can send $s$ bits reliably. Thus, if we can reliably send the $s$ bits of $H_2(H_1\vec{m})$, we can use them to recover the $k = \alpha s$ bits of $H_1\vec{m}$, which we can use to recover the $n = \alpha k = \alpha^2 s$ bits of $\vec{m}$.
@@ -179,6 +179,12 @@
 
         %part g)
         \item
+            If we use a parity matrix $H$ with exactly three ones in each column and exactly thirty ones in each row, this means the bipartite graph representation has $3k$ edges going from the $k$ data bits to the $s$ parity bits and $30s$ edges going from the $s$ parity bits to the $k$ data bits. Both numbers must be the same, so we set them equal to each other and solve:
+            \begin{flalign*}
+                30s = 3k \\
+                s = \frac{k}{10}
+            \end{flalign*}
+            So, for $k$ data bits, there are $\frac{k}{10}$ parity bits, and the size of $H$ is $\frac{k}{10} \times k$ (rows $\times$ columns).
 
 
         %part h)
@@ -195,6 +201,13 @@
 
         % part k)
         \item
+            From the plot, we see that, for $p = 0.05$, the path taken by the probability of error on a bit as we move up the tree towards the root converges to zero:
+        \begin{figure}[H]
+            \begin{center}
+                \includegraphics[width = \textwidth]{figure_k.png}
+                \caption{}
+            \end{center}
+        \end{figure}
 
 
         % part l)
@@ -206,9 +219,17 @@
 
         % part n)
         \item
-
+            By increasing $p$ and re-plotting until $f(x)$ intersects the function $x$, we see that the decoding method will fail roughly around $p \geq 0.083$:
+        \begin{figure}[H]
+            \begin{center}
+                \includegraphics[width = \textwidth]{figure_n.png}
+                \caption{}
+            \end{center}
+        \end{figure}
+            \noindent 
         % part o)
         \item
+            From the plot in the previous part, we see that, from about $p = 0.03$ to $p = 0.05$, $f(x)$ is very close to the function $x$. This means the path taken by the probability of error has a lot more "turns" than it would for lower values of $p$. In other words, since $f(x)$ and the function $x$ are very close for values of $p$ close to the threshold value, the path "bounces" back \& forth very rapidly, which means the decoding process will take many, many more iterations.
 
 
         % part p)

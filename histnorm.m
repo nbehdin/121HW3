@@ -26,34 +26,7 @@ if ischar (varargin{end}) && strcmpi ('plot', varargin{end})
 elseif nargout == 0
     doPlot = 1;    
 end
+[nelements,xcenters] = hist(varargin{:},100);
+stem(xcenters, nelements./1000)
 
-% normalize so the "area" is 1
-[xo,no] = hist (varargin{:});
-binwidths = diff ([min(varargin{1}) no(1:end-1)+diff(no)/2 max(varargin{1})]);
-xonorm = xo/sum (xo .* binwidths);
-varargout = {xonorm, no};
-varargout = varargout(1:nargout);
-
-% do plot
-if doPlot
-    cax = axescheck(varargin{:});
-
-%     % bored way: bar plot
-%     if isempty (cax)
-%         bar (no, xonorm, 'hist');
-%     else
-%         bar (cax, no, xonorm, 'hist');
-%     end
-    
-    % funny way: modify vertices of bar plot
-    hist (varargin{:});
-    if isempty (cax)
-        cax = gca;
-    end
-    ch = findobj (get (cax, 'children'), 'type', 'patch'); ch = ch(1);
-    vertices = get (ch, 'vertices');
-    for idx = 1:numel (xonorm)
-        vertices((idx-1)*5+[3 4],2) = xonorm(idx);     % hope it works :)
-    end
-    set (ch, 'vertices', vertices);
 end
