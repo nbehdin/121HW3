@@ -179,6 +179,12 @@
 
         %part g)
         \item
+            If we use a parity matrix $H$ with exactly three ones in each column and exactly thirty ones in each row, this means the bipartite graph representation has $3k$ edges going from the $k$ data bits to the $s$ parity bits and $30s$ edges going from the $s$ parity bits to the $k$ data bits. Both numbers must be the same, so we set them equal to each other and solve:
+            \begin{flalign*}
+                30s = 3k \\
+                s = \frac{k}{10}
+            \end{flalign*}
+            So, for $k$ data bits, there are $\frac{k}{10}$ parity bits, and the size of $H$ is $\frac{k}{10} \times k$ (rows $\times$ columns).
 
 
         %part h)
@@ -217,12 +223,13 @@
         \begin{figure}[H]
             \begin{center}
                 \includegraphics[width = \textwidth]{figure_n.png}
-                \caption{Figure 3.1}
+                \caption{}
             \end{center}
         \end{figure}
             \noindent 
         % part o)
         \item
+            From the plot in the previous part, we see that, from about $p = 0.03$ to $p = 0.05$, $f(x)$ is very close to the function $x$. This means the path taken by the probability of error has a lot more "turns" than it would for lower values of $p$. In other words, since $f(x)$ and the function $x$ are very close for values of $p$ close to the threshold value, the path "bounces" back \& forth very rapidly, which means the decoding process will take many, many more iterations.
 
 
         % part p)
