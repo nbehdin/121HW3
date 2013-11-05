@@ -35,7 +35,7 @@ while ~distrb
 end
 
 
-numTrials = 100;
+numTrials = 1000;
 N = zeros(1,numTrials);
 for i = 1:numTrials
     %Initialize generator matrix for efficiency

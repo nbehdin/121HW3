@@ -34,9 +34,6 @@ elseif distribution == 3
     row = zeros(1,k);
     row(onePositions) = 1; %Put ones in the D positions chosen
 end
-if (sum(row) == 0)
-    error('SHIT');
-end
 
 end
 
