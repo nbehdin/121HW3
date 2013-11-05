@@ -263,7 +263,11 @@
 
         % part l)
         \item
-
+            Taylor expanding $f(x)$ in the neighborhood of $x = 0$ yields:
+            \begin{flalign*}
+                f(x) &\approx 841px^2 - 23548px^3 + O(x^4)
+            \end{flalign*}
+            Since $x$ (the probability of that a lower-level bit is both erased and unable to be recovered) is very small (much less than one), the first term dominates: $f(x) \approx 841px^2$. Since $p$ is also less than one, $841px^2$ should be less than one. After $m$ iterations of the decoding process, we have something like $f(f(\dotsc f(x))) \approx (\alpha x^2)^{2m}$, where $\alpha$ is less than one. Thus we see the probability of error is converging to zero quite fast, like something less than one to the $2m^{\mbox{th}}$ power.
 
         % part m)
         \item
