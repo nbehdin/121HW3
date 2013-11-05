@@ -44,10 +44,14 @@ for i = 1:numTrials
     solved = false;
     decoded = NaN(1, k);
     parity = [];
+    count = [];
     while ~solved %cannot solve for message
         row = row + 1;
         G(row,:) = generateRow(k,distrb);
-        [solved, G, decoded, parity] = eqnsolv(G,message,eqnslv,row,decoded, parity);
+        [solved, G, decoded, parity, count] = eqnsolv(G,message,eqnslv,row,decoded, parity, count);
+    end
+    if (sum(decoded ~= message) ~= 0)
+        error('incorrect decoding');
     end
     N(i) = row;
 end
