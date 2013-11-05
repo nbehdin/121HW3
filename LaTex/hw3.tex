@@ -219,10 +219,18 @@
             \begin{flalign*}
                 p_e[i - 1] &= p(1 - (1 - p)^{29})^2          
             \end{flalign*}
+            Generalizing, we have:
+            \begin{flalign*}
+                p_e[j - 1] &= p(1 - (1 - p_e[j])^{29})^2
+            \end{flalign*}
+            For $j = 1$, the root data bit has three lower-neighbor parity bits, so we have:
+            \begin{flalign*}
+                p_e[0] &= p(1 - (1 - p_e[1])^{29})^3
+            \end{flalign*}
 
         % part k)
         \item
-            From the plot, we see that, for $p = 0.05$, the path taken by the probability of error on a bit as we move up the tree towards the root converges to zero:
+            In part j we found $f(x) = (1 - (1 - x)^{29})^3$. From the plot, we see that, for $p = 0.05$, the path taken by the probability of error on a bit as we move up the tree towards the root converges to zero:
         \begin{figure}[H]
             \begin{center}
                 \includegraphics[width = \textwidth]{figure_k.png}
