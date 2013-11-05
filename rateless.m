@@ -47,7 +47,6 @@ for i = 1:numTrials
     while ~solved %cannot solve for message
         row = row + 1;
         G(row,:) = generateRow(k,distrb);
-       
         [solved, G, decoded, parity] = eqnsolv(G,message,eqnslv,row,decoded, parity);
     end
     N(i) = row;

@@ -10,7 +10,12 @@ parity = [parity; newParity];
 if method == 1
     %CHECK IF WE CAN DECODE WITH LINEAR EQN SOLVER
     if row >= k && rank(G) == size(G,2)
-        decoded = G(1:row,:)\parity;
+        keyboard;
+        decoded = mod(G(1:row,:)\parity, 2);
+        if (sum(decoded ~= message') ~= 0)
+            error('decoded incorrectly')
+        end
+            
         tf = true;
     else
         tf = false;
@@ -30,8 +35,8 @@ elseif method == 2
         [G, decoded, parity] = subHelper(G, decoded, colIndex, message, parity, row);
     end
     if (sum(isnan(decoded)) == 0)
-        if (sum(decoded~=message))
-            error('oops');
+        if (sum(decoded~=message) ~= 0)
+            error('decoded incorrectly');
         end
         tf = true;
     else
@@ -50,15 +55,9 @@ for j = indices
         if (sum(G(j,:)) == 1)
             colIndex = find(G(j,:));
             if (~isnan(decoded(colIndex)))
-                decoded(colIndex) = parity(j);
+                decoded(colIndex) = parity(j); 
             end
-        end
-    end
-end
-for j = indices
-    if (j ~= row)
-        if (sum(G(j,:)) == 1)
-        [G, decoded, parity] = subHelper(G, decoded, colIndex, message, parity, j);
+            [G, decoded, parity] = subHelper(G, decoded, colIndex, message, parity, j);
         end
     end
 end
