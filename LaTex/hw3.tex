@@ -58,8 +58,20 @@
     \begin{enumerate}
 
         % part a)
-        \item Let $\vec{m} = [m_1 \cdots m_k]^\top$ be our message of length $k$.
-
+        \item Let $\vec{m} = [m_1 \cdots m_k]^\top$ be our message of length $k$. We will use a randomly generated ($\mathcal{B}(\frac{1}{2})$) parity check matrix H which will create an $s$-bit parity vector $\vec{p}$ such that
+        \begin{equation*}
+        \textbf{H}\vec{m} = \begin{bmatrix}
+            p_1 \\
+            \vdots\\
+            p_s
+            \end{bmatrix} = \vec{p}
+        \end{equation*}
+        
+        where each $p_i$ checks the parity of the elements $m_j \in \vec{m}$ such that $H_{i,j} = 1$ where $j \in \{1, \cdots, k\}$. \newline
+        
+        If we assume our parity vector $\vec{p}$ can be transmitted error free, and that the number of parity bits $s = \vert \vec{p} \vert = \alpha k$ where $\alpha > 1$, we can decode using a strategy similar to syndrome decoding.  There is a slight difference, however, in how our decoding strategy will work because we are guaranteed that the syndrome will go through without errors. Let us assume we sent the vector $[ \vec{m}^\top \vert \vec{p}^\top]^\top$ and we receive a noisy version $\vec{y}$. We would like to find the least weight noise (or, equivalently, nearest neighbor) which would result in the vector $\vec{y}$ received. Much like the argument when considering random coding, we will derive a bound on $\alpha$ that will ensure that our scheme will work.\newline
+        
+        First, note that when the size of our message $k$ is large, the WLLN tells us that our received codeword won't be too different ("too far" in Hamming distance) from the one we sent. As a result, the only source of error we need to consider is that another codeword will somehow be close to the noisy vector $\vec{y}$ as well and could possibly have a lower weight noise that would result in $\vec{y}$. This would result in decoding error. It is important to keep in mind that, because
 
         % part b)
         \item
