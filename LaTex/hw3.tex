@@ -186,6 +186,7 @@
 
         %part f)
         \item
+        	Assuming that we have $k$ message bits and some of them are erased and $s$ bits of message syndrome that are transmitted perfectly, we construct a graph where each of the $k$ message bits are directly connected to nodes at their corresponding index in the message we are trying to decode. The syndrome bits are connected to the nodes of the message we are trying to decode by drawing an edge to each index that was involved in the XOR that created that parity bit. When we decode, the received message bits that were not erased are pushed up to our decoded message nodes. We then attempt to use the edges with the parity bits to push bits to the decoded message slots that we don't have. There are times when we get stuck with this strategy. If we are unlucky with the combination of our parity check matrix and our erasures we can get in a situation where we lack enough information to come up with a unique solution for the decoded message. MAYBE ADD A PICTURE/DIAGRAM
 
 
 
@@ -223,13 +224,34 @@
 
         % part i)
         \item
-
+        	If we look at the tree after the zero-th level (1 data node with the 3 parity nodes) there are an additional 29 data nodes with 2 parity nodes extending from them. We can therefore describe the number of data and parity nodes with the following pattern: \\
+	\begin{eqnarray*}
+	D_0=1 \\ P_0=3 \\ P_{-1}=0 \\
+	D_i=29(P_{i-1}-P_{i-2})+D_{i-1} \\
+	P_i=2(D_i-D_{i-1})+P_{i-1} \\
+	\end{eqnarray*}
+	We then look at this problem in the same way as the previous one except now we are looking at the chance that a data node or a parity node occurs more than once. So first let's find the probability that there are no repeated data or parity nodes at a depth of $i$. \\
+	\begin{eqnarray*}
+	   P(\mbox{no two data nodes are the same}) = \frac{k\mbox{P}D_i}{k^{D_i}} = \frac{k!}{(k-D_i)!k^{D_i}}\\
+	   P(\mbox{no two parity nodes are the same}) = \frac{\frac{k}{10}\mbox{P}P_i}{\frac{k}{10}^{P_i}} = \frac{\frac{k}{10}!}{(\frac{k}{10}-P_i)!\frac{k}{10}^{P_i}}\\
+	   P(\mbox{no two nodes are the same}) = \left(\frac{k!}{(k-D_i)!k^{D_i}}\right)\left(\frac{\frac{k}{10}!}{(\frac{k}{10}-P_i)!\frac{k}{10}^{P_i}}\right) \\
+	   P(\mbox{no loops at depth i}) = 1- \left(\frac{k!}{(k-D_i)!k^{D_i}}\right)\left(\frac{\frac{k}{10}!}{(\frac{k}{10}-P_i)!\frac{k}{10}^{P_i}}\right) \leq \delta \\
+	\end{eqnarray*}
+	
+	Using similar analysis as the problem above we jump to the following approximation and solve for the bound on k: \\
+	\begin{eqnarray*}
+	   1-\left(e^{\frac{-(D_i-1)(D_i-2)}{2k}}\right)\left(e^{\frac{-(P_i-1)(P_i-2)}{2\frac{k}{10}}}\right) \leq \delta \\
+	   1- \delta \leq e^{\frac{-(D_i-1)(D_i-2)-10(P_i-1)(P_i-2)}{2k}} \\
+	   ln(1-\delta) \leq \frac{-(D_i-1)(D_i-2)-10(P_i-1)(P_i-2)}{2k} \\
+	   k \geq \frac{(D_i-1)(D_i-2)+10(P_i-1)(P_i-2)}{2 \log{\frac{1}{1-\delta}}} \\
+	\end{eqnarray*}
+	
 
         % part j)
         \item
             An erased bit at level $i - 1$ is unable to be recovered if both of its lower-neighbor parity bits are useless. A parity bit is useless if it is erased, or if any of its 29 lower-neighbor data bits are erased, since we decode by pushing/XORing lower-neighbor data bits up into parity bits. Since we are assuming the $s$ parity bits were sent reliably, we will just worry about the case where any of a parity bit's lower-neighbor data bits are erased. The probability of a data bit being erased is $p$, and the probability that any of a parity bit's lower-neighbor data bits are erased is $1 - (1 - p)^29$. A data bit has two lower-neighbor parity bits, so we have:
             \begin{flalign*}
-                p_e[i - 1] &= p(1 - (1 - p)^{29})^2          
+                p_e[i - 1] &= p(1 - (1 - p)^{29})^2
             \end{flalign*}
             Generalizing, we have:
             \begin{flalign*}
@@ -242,7 +264,7 @@
 
         % part k)
         \item
-            In part j we found $f(x) = (1 - (1 - x)^{29})^3$. From the plot, we see that, for $p = 0.05$, the path taken by the probability of error on a bit as we move up the tree towards the root converges to zero:
+            In part j we found $f(x) = (1 - (1 - x)^{29})^2$. From the plot, we see that, for $p = 0.05$, the path taken by the probability of error on a bit as we move up the tree towards the root converges to zero:
         \begin{figure}[H]
             \begin{center}
                 \includegraphics[width = \textwidth]{figure_k.png}
@@ -253,7 +275,11 @@
 
         % part l)
         \item
-
+            Taylor expanding $f(x)$ in the neighborhood of $x = 0$ yields:
+            \begin{flalign*}
+                f(x) &\approx 841px^2 - 23548px^3 + O(x^4)
+            \end{flalign*}
+            Since $x$ (the probability of that a lower-level bit is both erased and unable to be recovered) is very small (much less than one), the first term dominates: $f(x) \approx 841px^2$. Since $p$ is also less than one, $841px^2$ should be less than one. After $m$ iterations of the decoding process, we have something like $f(f(\dotsc f(x))) \approx (\alpha x^2)^{2m}$, where $\alpha$ is less than one. Thus we see the probability of error is converging to zero quite fast, like something less than one to the $2m^{\mbox{th}}$ power.
 
         % part m)
         \item
