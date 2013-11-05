@@ -10,7 +10,6 @@ parity = [parity; newParity];
 if method == 1
     %CHECK IF WE CAN DECODE WITH LINEAR EQN SOLVER
     if row >= k && rank(G) == size(G,2)
-        keyboard;
         decoded = mod(G(1:row,:)\parity, 2);
         if (sum(decoded ~= message') ~= 0)
             error('decoded incorrectly')
@@ -22,7 +21,6 @@ if method == 1
     end
 elseif method == 2
     %DECODE USING SUBSTITUTION CIPHER
-    
     [ G, parity, decoded, tf ] = substitutionSolver( G, parity, message, decoded, row );
 end
 end
