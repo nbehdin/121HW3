@@ -553,7 +553,17 @@
 
   % PROBLEM 3
   \item
-
+  {\bf Question:} 
+        EXIT charts are a tool for the analysis of iteratively decoded error-correcting codes. In an EXIT-like chart (from question 2), explain qualitatively the consequences of increasing the probability of error p. What happens graphically? How does this relate to the actual iterative decoding?
+        
+        
+        
+    {\bf Answer:}
+    	As seen in figures 21 and 22, the higher the probability of error is, the higher the function f(x) is, closer to the curve y=x. Starting the iteration from the specific p shows the stair-step pattern that goes down to 0 eventually. The higher up the value of p is initially, the farther it has to fall, and thus the more iterations it takes to decode the message. 
+	
+	Also, the closer the curve f(x) gets to x, the more of a "tunnel" it creates where each stair-step must be short. This results in many iterations to decode, as opposed to the two curves being far apart (for low p), and there being much fewer iterations. This makes sense, as a higher probability of error would result in much more erasures and in turn more iterations necessary to decode.
+	
+	
     \newpage
 
 \end{enumerate}
