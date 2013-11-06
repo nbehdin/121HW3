@@ -1,6 +1,5 @@
-function [ numDecoded, decoded, solved, numErasures ] = partP(  )
-numTrials = 1;
-numDecoded = zeros(1, numTrials);
+function [ numDecoded, numIter, solved, numErasures ] = partP( numTrials )
+numIter = zeros(1, numTrials);
 for i = 1:numTrials
     numErasures = 0;
     G = generateParityMatrix(1000);
@@ -31,12 +30,12 @@ for i = 1:numTrials
     count = sum(G')';
     
     [ G, parity, decoded, solved, count, numDecoded ] = substitutionSolver2( G, parity, decoded, count );
-        
+    numIter(i) = length(numDecoded);
     if (sum(decoded ~= message) ~= 0)
         display('incorrect decoding');
     end
 end
-
+hist(numIter);
 end
 
 function [ G, parity, decoded, tf, count, numDecoded ] = substitutionSolver2( G, parity, decoded, count )
