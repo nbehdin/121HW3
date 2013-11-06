@@ -42,7 +42,7 @@
 
 
         % part d)
-        \item Although substitution based decoding requires more overall equations, linear time decoding allows us to decode for much larger values of $k$, whereas the linear equation solver simply takes too long to decode.
+        \item Although substitution based decoding requires more overall equations, linear time decoding allows us to decode for much larger values of $k$, whereas the linear equation solver simply takes too long to decode. Specifically, we were not able to generate plots for $k = 1000$ in parts (a) and (b), but after implemented the substitution-only-based solver, we were able to generate plots for $k = 1000$ in under a minute.
 
 
 
@@ -273,8 +273,8 @@
                     &= \frac{\alpha^k}{m + \sum_{j = 1}^k \alpha^j} \\
                     &\approx 1 - \frac{1}{\alpha}
                 \end{flalign*}
-                Recall that the number of stages $k$ is determined by $n$, $\alpha$, and $s$, which we have now fixed. Thus we have a scheme in which everything is determined by the desired block error $\delta$. 
-              
+                Recall that the number of stages $k$ is determined by $n$, $\alpha$, and $s$, which we have now fixed. Thus we have a scheme in which everything is determined by the desired block error $\delta$.
+
 
         \end{itemize}
 
