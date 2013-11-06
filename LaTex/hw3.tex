@@ -34,14 +34,16 @@
 
 
         % part c)
-        \item The function to solve a sparse system of equations by substitution only (found in substitutionSolver.m) implements an algorithm similar to that described in Luby's seminal paper on LT Codes. The substitution based solver has more strict conditions for solvability than simple linear equation solving, so it will require more rows from the parity check matrix to decode. We are willing to pay this price price for the linear time decoding granted by substitution decoding. Below are plots of the PMF's of $N$ for both the ideal and robust Soliton distribution, where $N$ is the number of rows of $G$ that must be generated before we can successfully decode using our substitution decoding algorithm. See Figures 13 through 20.
+        \item The function to solve a sparse system of equations by substitution only (found in substitutionSolver.m) implements an algorithm similar to that described in Luby's seminal paper on LT Codes. The substitution based solver has more strict conditions for solvability than simple linear equation solving, so it will require more rows from the parity check matrix to decode. We are willing to pay this price price for the linear time decoding granted by substitution decoding. Below are plots of the PMF's of $N$ for both the ideal and robust Soliton distribution, where $N$ is the number of rows of $G$ that must be generated before we can successfully decode using our substitution decoding algorithm. See Figures 13 through 20. \\
+            \\
+            Compared to parts (a) and (b), it takes noticeably more equations to be able to solve for the message bits, and as a result, the median and 90-percent quantile are greater. But, the decoding program runs \emph{much} faster.
 
 
 
 
         % part d)
         \item Although substitution based decoding requires more overall equations, linear time decoding allows us to decode for much larger values of $k$, whereas the linear equation solver simply takes too long to decode. Specifically, we were not able to generate plots for $k = 1000$ in parts (a) and (b), but after implemented the substitution-only-based solver, we were able to generate plots for $k = 1000$ in under a minute.
-            
+
             \newpage
 
 
@@ -486,7 +488,15 @@
 	   ln(1-\delta) \leq \frac{-(D_i-1)(D_i-2)-10(P_i-1)(P_i-2)}{2k} \\
 	   k \geq \frac{(D_i-1)(D_i-2)+10(P_i-1)(P_i-2)}{2 \log{\frac{1}{1-\delta}}} \\
 	\end{eqnarray*}
-	
+	Solving the above recurrence relations yields:
+        \begin{flalign*}
+            D_i &= \frac{1}{19}(29\cdot58^i - 10) \\
+            P_i &= \frac{1}{19}(58^i - 1)
+        \end{flalign*}
+    Substituting, we have:
+    \begin{flalign*}
+        k &\geq \frac{1}{361}(-2823\cdot58^i + 851\cdot3364^i + 9192)
+    \end{flalign*}
 
         % part j)
         \item
