@@ -1,6 +1,7 @@
-function [ G, parity, decoded, tf, count ] = substitutionSolver( G, parity, decoded, row, count )
+function [ G, parity, decoded, tf, count, numDecoded ] = substitutionSolver( G, parity, decoded, row, count )
 % substitutionSolver Attempt to solve by substitution
 %   use this iterively. solve for as many bits as you can given new row
+numDecoded = [];
 count = [count; sum(G(row,:))];
 for i = find(~isnan(decoded))
     if (G(row,i) == 1)
@@ -11,7 +12,7 @@ for i = find(~isnan(decoded))
 end
 
 newSingleEdges = find(count == 1);
-while ((size(newSingleEdges, 1) ~= 0) && (length(newSingleEdges) > 0))
+while (~isempty(newSingleEdges))
     if (sum(isnan(decoded)) == 0)
         break;
     end
@@ -19,6 +20,7 @@ while ((size(newSingleEdges, 1) ~= 0) && (length(newSingleEdges) > 0))
     colIndex = find(G(r,:));
     decoded(colIndex) = parity(r);
     [G, decoded, parity, count] = subHelper(G, decoded, colIndex, parity, count);
+    numDecoded = [numDecoded; sum(isnan(decoded))];
     newSingleEdges = find(count == 1); 
 end
 
