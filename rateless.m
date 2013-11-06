@@ -1,4 +1,4 @@
-function [N] = rateless(k,encoding,decoding)
+function [N] = rateless(k,encoding,decoding,numTrials)
 %RATELESS simulates rateless codes for different distributions
 %   k is the number of bits of the input message
 %   encoding is the distribution chosen for encoding symbols
@@ -35,7 +35,7 @@ while ~distrb
 end
 
 
-numTrials = 10;
+%numTrials = 10;
 N = zeros(1,numTrials);
 for i = 1:numTrials
     %Initialize generator matrix for efficiency
