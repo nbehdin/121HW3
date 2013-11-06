@@ -281,8 +281,10 @@
 
         %part f)
         \item
-        	Assuming that we have $k$ message bits and some of them are erased and $s$ bits of message syndrome that are transmitted perfectly, we construct a graph where each of the $k$ message bits are directly connected to nodes at their corresponding index in the message we are trying to decode. The syndrome bits are connected to the nodes of the message we are trying to decode by drawing an edge to each index that was involved in the XOR that created that parity bit. When we decode, the received message bits that were not erased are pushed up to our decoded message nodes. We then attempt to use the edges with the parity bits to push bits to the decoded message slots that we don't have. There are times when we get stuck with this strategy. If we are unlucky with the combination of our parity check matrix and our erasures we can get in a situation where we lack enough information to come up with a unique solution for the decoded message. MAYBE ADD A PICTURE/DIAGRAM
-
+        	Assuming that we have $k$ message bits and some of them are erased and $s$ bits of message syndrome that are transmitted perfectly, we construct a graph where each of the $k$ message bits are directly connected to nodes at their corresponding index in the message we are trying to decode. The syndrome bits are connected to the nodes of the message we are trying to decode by drawing an edge to each index that was involved in the XOR that created that parity bit. When we decode, the received message bits that were not erased are pushed up to our decoded message nodes. We then attempt to use the edges with the parity bits to push bits to the decoded message slots that we don't have. There are times when we get stuck with this strategy. If we are unlucky with the combination of our parity check matrix and our erasures we can get in a situation where we lack enough information to come up with a unique solution for the decoded message. \\
+	\begin{center}
+	\includegraphics[scale=0.5, angle=0]{../hw3-f.png}
+	\end{center}
 
 
         %part g)
