@@ -16,6 +16,6 @@ if method == 1
     end
 elseif method == 2
     %DECODE USING SUBSTITUTION CIPHER
-    [ G, parity, decoded, tf, count ] = substitutionSolver( G, parity, message, decoded, row, count );
+    [ G, parity, decoded, tf, count ] = substitutionSolver( G, parity, decoded, row, count );
 end
 end

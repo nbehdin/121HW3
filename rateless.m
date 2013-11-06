@@ -56,6 +56,6 @@ for i = 1:numTrials
     N(i) = row;
 end
 
-histnorm(N,500);
+histnorm(N);
 end
 
