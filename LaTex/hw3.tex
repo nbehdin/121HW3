@@ -510,7 +510,7 @@
 
         % part j)
         \item
-            An erased bit at level $i - 1$ is unable to be recovered if both of its lower-neighbor parity bits are useless. A parity bit is useless if it is erased, or if any of its 29 lower-neighbor data bits are erased, since we decode by pushing/XORing lower-neighbor data bits up into parity bits. Since we are assuming the $s$ parity bits were sent reliably, we will just worry about the case where any of a parity bit's lower-neighbor data bits are erased. The probability of a data bit being erased is $p$, and the probability that any of a parity bit's lower-neighbor data bits are erased is $1 - (1 - p)^29$. A data bit has two lower-neighbor parity bits, so we have:
+            An erased bit at level $i - 1$ is unable to be recovered if both of its lower-neighbor parity bits are useless. A parity bit is useless if it is erased, or if any of its 29 lower-neighbor data bits are erased, since we decode by pushing/XORing lower-neighbor data bits up into parity bits. Since we are assuming the $s$ parity bits were sent reliably, we will just worry about the case where any of a parity bit's lower-neighbor data bits are erased. The probability of a data bit being erased is $p$, and the probability that any of a parity bit's lower-neighbor data bits are erased is $1 - (1 - p)^{29}$. A data bit has two lower-neighbor parity bits, so we have:
             \begin{flalign*}
                 p_e[i - 1] &= p(1 - (1 - p)^{29})^2
             \end{flalign*}
@@ -557,7 +557,7 @@
             \noindent
         % part o)
         \item
-            From the plot in the previous part, we see that, from about $p = 0.03$ to $p = 0.05$, $f(x)$ is very close to the function $x$. This means the path taken by the probability of error has a lot more "turns" than it would for lower values of $p$. In other words, since $f(x)$ and the function $x$ are very close for values of $p$ close to the threshold value, the path "bounces" back \& forth very rapidly, which means the decoding process will take many, many more iterations.
+            From the plot in the previous part, we see that, from about $p = 0.03$ to $p = 0.05$, $f(x)$ is very close to the function $x$. This means the path taken by the probability of error has a lot more "turns" than it would for lower values of $p$. In other words, since $f(x)$ and the function $x$ are very close for values of $p$ close to the threshold value, the path "bounces" back \& forth very rapidly, which obviously tells us that the probability of error doesn't go to zero very quickly, making our channel less reliable. From a decoding computation perspective, it means that it will take more iterations to solve for all the symbols because there are more overall erased symbols, which make every iteration less fruitful (in terms of the number of symbols it can recover using substitution).
 
         % part p)
         \item
