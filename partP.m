@@ -1,4 +1,9 @@
 function [ numDecoded, numIter, solved, numErasures ] = partP( numTrials )
+%% partP : code for part p of homework 4
+%   this counts the number of iterations until you are unable to make
+%   anymore substitutions. It prints 'incorrect decoding' if we are unable 
+%   to decoded properly with the given parity matrix and erasures.
+
 numIter = zeros(1, numTrials);
 for i = 1:numTrials
     numErasures = 0;
@@ -7,7 +12,6 @@ for i = 1:numTrials
     k = length(message);
     parity = mod(G*message', 2);
     
-    row = k/10;
     decoded = NaN(1, k);
     if size(G, 2) > 1000
         keyboard;
@@ -27,7 +31,7 @@ for i = 1:numTrials
     parity = [tempParity; parity];
     G = [temp; G];
     
-    count = sum(G')';
+    count = sum(G, 2);
     
     [ G, parity, decoded, solved, count, numDecoded ] = substitutionSolver2( G, parity, decoded, count );
     numIter(i) = length(numDecoded);
@@ -39,8 +43,8 @@ hist(numIter);
 end
 
 function [ G, parity, decoded, tf, count, numDecoded ] = substitutionSolver2( G, parity, decoded, count )
-% substitutionSolver Attempt to solve by substitution
-%   use this iterively. solve for as many bits as you can given new row
+% substitutionSolver2 attempts to solve in a single go and counts to number
+% of iterations as the number of rounds where we make subsitutions
 numDecoded = [];
 
 newSingleEdges = find(count == 1);
