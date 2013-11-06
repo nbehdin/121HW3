@@ -1,4 +1,4 @@
-function [tf, G, decoded, parity, count] = eqnsolv(G,message,method,row,decoded, parity, count)
+function [tf, G, decoded, parity, count] = eqnsolv(G, message, method, row, decoded, parity, count)
 %EQNSOLV Solves a system of linear equations using method
 %   method is either linsolv or substitution cipher solve
 

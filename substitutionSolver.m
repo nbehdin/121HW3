@@ -1,4 +1,4 @@
-function [ G, parity, decoded, tf, count ] = substitutionSolver( G, parity, decoded, row,count )
+function [ G, parity, decoded, tf, count ] = substitutionSolver( G, parity, decoded, row, count )
 % substitutionSolver Attempt to solve by substitution
 %   use this iterively. solve for as many bits as you can given new row
 count = [count; sum(G(row,:))];
