@@ -257,21 +257,13 @@
                     where some number of the $y_i$s will be replaced with $e_i$s.
                 \item Solve for all $e_i$s and reconstruct $\vec{m}$.
             \end{itemize}
-            The Law of Large Numbers tells us we should expect roughly $k(p + \epsilon)$ erasures, so we decode only when less than $k(p + \epsilon)$ erasures occur, otherwise we declare error. If there aren't too many erasures, error occurs if any false message's syndrome (parity bits) matches the received message $\vec{y}$'s syndrome ($H\vec{y}$, with erasures) -- this occurs when a false message matches the received message (with erasures). We can compute the probability of error as follows:
-            \begin{flalign*}
-                P(\mbox{error}) &= P(\mbox{at least one false syndrome matches received syndrome}) \\
-                &\leq 2^s\cdot2^{-k(p + \epsilon)} \\
-                &= 2^{s - k(p + \epsilon)} \\
-                &= 2^{s(1 - \alpha(p + \epsilon))}
-            \end{flalign*}
-            The inequality comes from a union bound -- there are $2^s$ possible syndromes, and the probability of any one false syndrome matching the received syndrome is equal to the probability that all of the non-erased message bits match a false message. There are $2^k$ total messages, and if we only decode when there are $k(1 - (p + \epsilon))$ non-erased bits, there are $2^{k(1 - (p + \epsilon))}$ messages that could match the received message with erasures. Then the probability of one false syndrome matching the received syndrome is simply $\frac{2^{k(1 - (p + \epsilon))}}{2^k} = 2^{-k(p + \epsilon)}$. \\
-            \\
-            We then choose the "reliability amplification" parameter $\alpha$ such that the probability of error goes to zero with $s$, i.e. the exponent in the probability of error must be negative:
-            \begin{flalign*}
-                1 - \alpha(p + \epsilon) &< 0 \\
-                \alpha &> \frac{1}{p + \epsilon}
-            \end{flalign*}
-            And thus we see that, if we choose $\alpha > \frac{1}{p}$, this scheme will work with probability of error going to zero with $s$.
+            The Law of Large Numbers tells us we should expect roughly $k(p + \epsilon)$ erasures, and we will not be able to decode if this number is greater than our number of parity bits $s$. If the number of erasures is less than $s$, than we are guaranteed to be able to decode because we will have at least $k$ equations to solve for $k$ variables (we assume that the H generated is linearly independent, which it very likely will be, and we can always regenerate H until it satisfies linear independence). Thus we must ensure that
+            \begin{eqnarray*}
+            s &>& k(p + \epsilon)\\
+            \frac{k}{\alpha} &>& k(p + \epsilon)\\
+            \frac{1}{\alpha} &>& (p + \epsilon)\\
+            \alpha &<& \frac{1}{p + \epsilon}
+            \end{eqnarray*}
 
         % part c)
         \item
@@ -551,7 +543,7 @@
             Since $x$ (the probability of that a lower-level bit is both erased and unable to be recovered) is very small (much less than one), the first term dominates: $f(x) \approx 841px^2$. Since $p$ is also less than one, $841px^2$ should be less than one. After $m$ iterations of the decoding process, we have something like $f(f(\dotsc f(x))) \approx (\alpha x^2)^{2m}$, where $\alpha$ is less than one. Thus we see the probability of error is converging to zero quite fast, like something less than one to the $2m^{\mbox{th}}$ power.
 
         % part m)
-        \item
+        \item Assume that our local tree-structure has a depth $i$ that is fixed. Thus we will have to decode (using the bottom-to-top process described above) $\frac{k}{i}$ trees in order to successfully recover our message. Thus the order of computations required will be $O(k\times \text{computations required to decode one tree)}$. We expect that the number of computations will be linear in $k$ (that's the whole point!) so we must show that the tree can be decoded in sub-linear computations. Given a tree depth of $i$, however, the number of nodes is constant, so this will not scale with $k$. Thus we will see order $k$ computations to decode a code of $k$ bits.
 
         % part n)
         \item
@@ -566,7 +558,6 @@
         % part o)
         \item
             From the plot in the previous part, we see that, from about $p = 0.03$ to $p = 0.05$, $f(x)$ is very close to the function $x$. This means the path taken by the probability of error has a lot more "turns" than it would for lower values of $p$. In other words, since $f(x)$ and the function $x$ are very close for values of $p$ close to the threshold value, the path "bounces" back \& forth very rapidly, which means the decoding process will take many, many more iterations.
-
 
         % part p)
         \item
