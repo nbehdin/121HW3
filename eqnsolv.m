@@ -1,4 +1,4 @@
-function [tf, G, decoded, parity, count, numDecoded] = eqnsolv(G, message, method, row, decoded, parity, count)
+function [tf, G, decoded, parity, count] = eqnsolv(G, message, method, row, decoded, parity, count)
 %EQNSOLV Solves a system of linear equations using method
 %   method is either linsolv or substitution cipher solve
 
@@ -19,6 +19,6 @@ if method == 1
     end
 elseif method == 2
     %DECODE USING SUBSTITUTION CIPHER
-    [ G, parity, decoded, tf, count, numDecoded ] = substitutionSolver( G, parity, decoded, row, count );
+    [ G, parity, decoded, tf, count ] = substitutionSolver( G, parity, decoded, row, count );
 end
 end
