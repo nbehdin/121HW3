@@ -1,4 +1,4 @@
-function [ numDecoded, numIter, solved, numErasures ] = partP( numTrials )
+function [ numDecoded, numIter, solved, numErasures ] = partP( numTrials,p )
 %% partP : code for part p of homework 4
 %   this counts the number of iterations until you are unable to make
 %   anymore substitutions. It prints 'incorrect decoding' if we are unable 
@@ -21,7 +21,7 @@ for i = 1:numTrials
     temp = zeros(k,k);
     tempParity = zeros(k,1);
     for j=1:k
-        if rand > 0.05
+        if rand > p
             temp(j, j) = 1;
             tempParity(j) = message(j);
             numErasures = numErasures + 1;
@@ -45,7 +45,7 @@ end
 function [ G, parity, decoded, tf, count, numDecoded ] = substitutionSolver2( G, parity, decoded, count )
 % substitutionSolver2 attempts to solve in a single go and counts to number
 % of iterations as the number of rounds where we make subsitutions
-numDecoded = [];
+numDecoded = [1000];
 
 newSingleEdges = find(count == 1);
 while (~isempty(newSingleEdges))

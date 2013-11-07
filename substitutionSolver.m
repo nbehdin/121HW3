@@ -9,7 +9,7 @@ for i = find(~isnan(decoded))
         count(row) = count(row) - 1;
     end
 end
-
+%same as ripple
 newSingleEdges = find(count == 1);
 while ((~isempty(newSingleEdges)))
     if (sum(isnan(decoded)) == 0)
@@ -30,6 +30,7 @@ end
 end
 
 function [G, decoded, parity, count] = subHelper(G, decoded, colIndex, parity, count)
+% 3 things happen:
 indices = find(G(:,colIndex) == 1);
 G(indices, colIndex) = 0;
 parity(indices) = mod(parity(indices)+decoded(colIndex), 2);
